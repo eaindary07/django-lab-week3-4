@@ -3,6 +3,10 @@ import django.db
 from django.db.models import Q, F
 from core.models import Employee, Course
 
+# Reset salaries so the script can be re-run safely
+Employee.objects.filter(employee_code="EMP001").update(salary=Decimal("65000.00"))
+Employee.objects.filter(employee_code="EMP002").update(salary=Decimal("75000.00"))
+
 print("===== TASK 4.1: Q OBJECTS =====")
 query_or = Employee.objects.filter(Q(department__code="IT") | Q(salary__gt=70000))
 print("OR Query Results:", list(query_or))
